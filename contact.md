@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Contactame
-permalink: /contact/
+permalink: /contact
 ---
 
 hola
