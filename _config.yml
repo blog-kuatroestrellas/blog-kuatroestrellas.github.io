@@ -1,7 +1,7 @@
 # Site settings
 title: kuatroestrellas
-description: Bienvenidos a mi blog donde publico cualquier cosa que me interese.
-cover: assets/images/radhakrishna.jpg
+description: Tecnologías de la Información y Comunicaciones y Cultura Geek
+cover: assets/images/robot.jpg
 logo: assets/images/logo.png
 favicon: assets/images/favicon.png
 baseurl: "/" # the subpath of your site, e.g. /blog/ or / for root

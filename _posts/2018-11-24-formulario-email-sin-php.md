@@ -6,8 +6,10 @@ tags: formspree email formulario html estatico
 author: kuatroestrellas
 ---
 
+
 Hola a todos bienvenidos a esta primer entrada de mi blog **kuatroestrellas** aún sigo trabajando en corregirle algunos bugs, en estos días estuve trabajando con sitios estáticos, específicamente estuve usando jekyll un generador de contenido estático que puede ser una alternativa a wordpress si lo que quieres es unicamente crear un blog, pero bueno vayamonos directamente al grano.
 
+<amp-img src="{{ site.baseurl }}assets/images/form.jpg" width="656" height="400" layout="responsive" alt="" class="mb3"></amp-img>
 Al momento de intentar ponerle un formulario de contacto me topé con que necesitas usar php, o algún otro lenguaje que se ejecute del lado del servidor, enlazarlo a un servicio online o algo complicado y buscando por ahi me encontre con <a href="https://formspree.io/" target="_blank">formpspree.io</a> , un servicio que te da el control total en tu formulario y no requiere que instales nada en tu servidor.
 
 Ventajas:  
@@ -58,3 +60,17 @@ a tu carpeta de spam-->
 Verdad que es bien sencillo.
 
 En la pagina de <a href="https://formspree.io/" target="_blank">formspree.io</a> encontraras la documentación completa para usar mas elementos es tu formulario y también podrás adquirir la versión PRO.
+
+<!-- Start Socialbox -->
+<div class="ampstart-social-box mb4">
+<div class="fb-like" data-href="https://blog-kuatroestrellas.github.io/formulario-email-sin-php" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+
+<div class="fb-save" data-uri="https://blog-kuatroestrellas.github.io/formulario-email-sin-php" data-size="large"></div>
+
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-via="kuatroestrellas" data-lang="es" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+</div>
+
+<hr>
+
+<div class="fb-comments" data-href="https://blog-kuatroestrellas.github.io/formulario-email-sin-php" data-numposts="10"></div>

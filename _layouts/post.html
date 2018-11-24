@@ -138,14 +138,23 @@ layout: default
         {% endif %}
         <a href="{{site.baseurl}}authors/#{{author[1].username}}"><h4 class="author-name">{{author[1].name}}</h4></a>
         <p class="mb4 px3">{{author[1].bio}}</p>
+        <a href="https://twitter.com/kuatroestrellas?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="large" data-lang="es" data-show-count="false">Follow @kuatroestrellas</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
+
   {% endif %}
 {% endfor %}
 
-<!-- Start Socialbox -->
-<div class="ampstart-social-box mb4">
-  
-</div>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.2';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-page" data-href="https://www.facebook.com/blogdekuatroestrellas" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/blogdekuatroestrellas" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/blogdekuatroestrellas">Blog de kuatroestrellas</a></blockquote></div>
+
 <!-- End Socialbox -->
 
 

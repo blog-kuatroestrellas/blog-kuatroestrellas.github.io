@@ -49,7 +49,11 @@
 
   <ul class="ampstart-sidebar-faq list-reset m0">
   {% if site.contact %}
-    <li class="ampstart-faq-item"><a href="/contact" class="text-decoration-none">Contacto</a></li>
+    <li class="ampstart-faq-item"><a href="/downloads" class="text-decoration-none">DESCARGAS</a></li>
+  {% endif %}
+
+  {% if site.contact %}
+    <li class="ampstart-faq-item"><a href="/contact" class="text-decoration-none">CONTACTO</a></li>
   {% endif %}
   {% if site.privacy-policy %}
     <li class="ampstart-faq-item"><a href="/privacy-policy" class="text-decoration-none">Política de Privacidad</a></li>
@@ -80,3 +84,32 @@ window.cookieconsent.initialise({
   }
 })});
 </script>
+
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : 'your-app-id',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v3.2'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+    
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.2';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
