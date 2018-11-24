@@ -36,4 +36,4 @@ Esta compañía no venderá, cederá ni distribuirá la información personal qu
 
 "Blog de kuatroestrellas" Se reserva el derecho de cambiar los términos de la presente Política de Privacidad en cualquier momento.
 
-Esta politica de privacidad se han generado en politicadeprivacidadplantilla.com.
+Esta politica de privacidad se han generado en <a href="https://politicadeprivacidadplantilla.com/">politicadeprivacidadplantilla.com.</a>
