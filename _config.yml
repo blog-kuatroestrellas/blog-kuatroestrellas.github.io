@@ -1,22 +1,22 @@
 # Site
-name: Affiliates Theme for Jekyll
-description: Jekyll Theme for Blogging
-meta_description: "Jekyll theme for blogging."
+name: kuatroestrellas
+description: Informatica Ingenieria Electronica y cultura geek
+meta_description: "Blog de kuatroestrellas"
 logo: 'assets/images/logo.png'
-favicon: 'assets/images/favicon.ico'
+favicon: '/assets/images/favicon.ico'
 paginate: 12
 baseurl: 
-email: 'wowthemesnet@gmail.com'
-google_analytics: 'UA-46278016-1'
-disqus: 'demowebsite'
-sharethis: '<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5a6b2fe4fb197a0011c589f6&product=sticky-share-buttons"></script>'
+email: 'kuatroestrellas@gmail.com'
+google_analytics: ''
+disqus: 'kuatroestrellas'
+sharethis: '<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5c62074b338ffe0011030d64&product=sticky-share-buttons" async="async"></script>'
 
 # Authors
 authors:
   sal:
     name: Sal
     display_name: Sal
-    gravatar: e56154546cf4be74e393c62d1ae9f9d4
+    gravatar: d6abe18424bc22ef3b78aa2b2d97c04a
     email: wowthemesnet@gmail.com
     web: https://www.wowthemes.net/category/jekyll-themes/
     twitter: https://twitter.com/wowthemesnet
