@@ -1,6 +1,6 @@
 ---
-layout: post
-title:  "Markdown Example"
+layout: post-right-sidebar
+title:  "Instalar Wordpress en Google Cloud - parte 3 (Instalar SSL GRATIS)"
 author: kuatroestrellas
 categories: [ Jekyll, tutorial ]
 image: assets/images/6.jpg

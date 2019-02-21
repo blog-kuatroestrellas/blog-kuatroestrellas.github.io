@@ -1,14 +1,15 @@
 ---
-layout: post
-title:  "Powerful things you can do with the Markdown editor"
+layout: post-right-sidebar
+title:  "Instalar Wordpress en Google Cloud - Parte 1 (Instalación)"
 author: kuatroestrellas
-categories: [ Jekyll, tutorial ]
-image: assets/images/4.jpg
-featured: true
+categories: [ Google cloud, tutorial ]
+image: assets/images/1.jpg
+description: "this is my meta description"
 ---
-There are lots of powerful things you can do with the Markdown editor
 
-If you've gotten pretty comfortable with writing in Markdown, then you may enjoy some more advanced tips about the types of things you can do with Markdown!
+hola  
+mundo
+<a href="#">education should equip</a>
 
 As with the last post about the editor, you'll want to be actually editing this post as you read it so that you can see all the Markdown code we're using.
 
@@ -48,3 +49,5 @@ Another way to insert links in markdown is using reference lists. You might want
 Perhaps the best part of Markdown is that you're never limited to just Markdown. You can write HTML directly in the Markdown editor and it will just work as HTML usually does. No limits! Here's a standard YouTube embed code as an example:
 
 <p><iframe style="width:100%;" height="315" src="https://www.youtube.com/embed/Cniqsc9QfDo?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></p>
+
+> We are prone to let our mental life become invaded by legions of half truths, prejudices, and propaganda. At this point, I often wonder whether or not education is fulfilling its purpose. A great majority of the so-called educated people do not think logically and scientifically.

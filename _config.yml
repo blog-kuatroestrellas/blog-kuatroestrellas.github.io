@@ -13,22 +13,14 @@ sharethis: '<script type="text/javascript" src="//platform-api.sharethis.com/js/
 
 # Authors
 authors:
-  sal:
-    name: Sal
-    display_name: Sal
+  kuatroestrellas:
+    name: Arturo Vargas
+    display_name: Arturo
     gravatar: d6abe18424bc22ef3b78aa2b2d97c04a
-    email: wowthemesnet@gmail.com
-    web: https://www.wowthemes.net/category/jekyll-themes/
-    twitter: https://twitter.com/wowthemesnet
-    description: "Author of Affiliates, a template available for WordPress, HTML, Ghost and Jekyll. You are currently previewing Jekyll template demo."
-  john:
-    name: John
-    display_name: John
-    gravatar: b1cc14991db7a456fcd761680bbc8f81
-    email: wowthemesnet@gmail.com
-    web: https://www.wowthemes.net/category/jekyll-themes/
-    twitter: https://twitter.com/wowthemesnet
-    description: "This is the author box. Write a short description of the author here. You are currently previewing Affiliates theme demo, a Jekyll template compatible with Github pages."
+    email: kuatroestrellas@gmail.com
+    web: https://kuatroestrellas.github.io
+    twitter: https://twitter.com/kuatroestrellas
+    description: "Autor y escritor del blog"
 
 # Plugins
 plugins: 
