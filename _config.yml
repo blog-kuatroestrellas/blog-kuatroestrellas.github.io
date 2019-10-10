@@ -1,6 +1,6 @@
 # Site
 name: kuatroestrellas
-description: Informatica Ingenieria Electronica y cultura geek
+description: Informatica Electronica Arduino Python 
 meta_description: "Blog de kuatroestrellas"
 logo: 'assets/images/logo.png'
 favicon: '/assets/images/favicon.ico'
@@ -20,7 +20,7 @@ authors:
     email: kuatroestrellas@gmail.com
     web: https://kuatroestrellas.github.io
     twitter: https://twitter.com/kuatroestrellas
-    description: "Autor y escritor del blog"
+    description: "TICs Enginer"
 
 # Plugins
 plugins: 

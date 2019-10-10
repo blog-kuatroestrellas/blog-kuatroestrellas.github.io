@@ -1,0 +1,18 @@
+I""<p>Si tu programa necesita y no cuentas con un lector de código de barras ya sea porque eres pobre o porque eres un estudiante(que es lo mismo), vos podes usar tu dispositivo Android como un lector de código de barras.</p>
+
+<h2 id="te-gustaría-saber-como-hacerlo-sigue-leyendo">Te gustaría saber como hacerlo, sigue leyendo…</h2>
+
+<p>Te podría dejar el código para que solo copies y pegues(y lo haré) pero también te explicare como funciona.</p>
+
+<blockquote>
+  <p>Nota: esta solución aplica para un ambiente escolar ya sea porque tu profesor te pidió un punto de venta y no cuentas con uno de estos lectores, o para hacer pruebas o un ambiente muy pequeño, para el mundo real puede resultar muy incómodo ya que el telefono es algo lento leyendo los códigos.</p>
+</blockquote>
+
+<p><code class="highlighter-rouge">hola</code></p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hola</span><span class="p">():</span>
+    <span class="k">print</span> <span class="n">hola</span> <span class="n">mundo</span>
+    <span class="k">break</span>
+<span class="n">hola</span><span class="p">()</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="p">,</span> <span class="n">sys</span></code></pre></figure>
+:ET
