@@ -5,7 +5,7 @@ meta_description: "Blog de kuatroestrellas"
 logo: 'assets/images/logo.png'
 favicon: '/assets/images/favicon.ico'
 paginate: 12
-baseurl: 
+baseurl: #https://blog-kuatroestrellas.github.io
 email: 'kuatroestrellas@gmail.com'
 google_analytics: ''
 disqus: 'kuatroestrellas'

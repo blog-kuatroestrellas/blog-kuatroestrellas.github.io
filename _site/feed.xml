@@ -5,38 +5,70 @@
     <description>Informatica Electronica Arduino Python</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 10 Oct 2019 17:08:39 -0500</pubDate>
-    <lastBuildDate>Thu, 10 Oct 2019 17:08:39 -0500</lastBuildDate>
+    <pubDate>Sun, 29 Dec 2019 00:34:30 -0600</pubDate>
+    <lastBuildDate>Sun, 29 Dec 2019 00:34:30 -0600</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
-        <title>Leer código de barras con Android y Python</title>
-        <description>&lt;p&gt;Si tu programa necesita y no cuentas con un lector de código de barras ya sea porque eres pobre o porque eres un estudiante(que es lo mismo), vos podes usar tu dispositivo Android como un lector de código de barras.&lt;/p&gt;
+        <title>Generar un CSR en Google Cloud</title>
+        <description>&lt;p&gt;Generación de una solicitud de firma de certificado (CSR) en los servicios de Google Cloud&lt;/p&gt;
 
-&lt;h2 id=&quot;te-gustaría-saber-como-hacerlo-sigue-leyendo&quot;&gt;Te gustaría saber como hacerlo, sigue leyendo…&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Antes de solicitar un certificado SSL&lt;/strong&gt;, es necesario generar una Solicitud de firma de certificado (CSR).&lt;/p&gt;
 
-&lt;p&gt;Te podría dejar el código para que solo copies y pegues(y lo haré) pero también te explicare como funciona.&lt;/p&gt;
+&lt;p&gt;Google Cloud Platform le permite generar una CSR (Certificate Signing Request, Solicitud de Firma de Certificado) utilizando &lt;strong&gt;Google Cloud Shell&lt;/strong&gt; , la consola de línea de comandos integrada que proporciona acceso a los recursos de la nube directamente desde un navegador.&lt;/p&gt;
+
+&lt;p&gt;Se requiere tener un proyecto creado previamente para acceder a Cloud Shell. Puede ser creado desde el &lt;strong&gt;IAM y administración&lt;/strong&gt; de área &lt;a href=&quot;https://console.cloud.google.com/project?_ga=1.216733855.869957752.1479794157&quot;&gt;aquí&lt;/a&gt; . Una vez que se crea el proyecto, Google Cloud Shell está disponible para usted.&lt;/p&gt;
+
+&lt;p&gt;Google Cloud Shell se puede activar usando el botón &lt;strong&gt;Activar Google Cloud Shell&lt;/strong&gt; en la parte superior de la ventana:
+&lt;img src=&quot;/assets/images/gcloud.png&quot; alt=&quot;walking&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Se abrirá una nueva sesión de Cloud Shell en la parte inferior de la ventana. De forma predeterminada, se ubicará en el directorio de inicio del usuario /home/user:&lt;/p&gt;
+
+&lt;p&gt;Google Cloud Shell admite el kit de herramientas &lt;strong&gt;OpenSSL&lt;/strong&gt; que se puede usar para la generación de CSR.&lt;/p&gt;
+
+&lt;p&gt;Los pasos para generar una CSR en Cloud Shell son :&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ejecuta el siguiente comando para crear la solicitud de Clave Privada y Solicitud de Firma de Certificado ( server.key y server.csr ).&lt;/li&gt;
+  &lt;li&gt;Para evitar más confusión, recomendamos reemplazar “ejemplo.com” en ejemplo.com.key y ejemplo.com.csr con el nombre de dominio real para el que se emitirá el certificado.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;openssl req &lt;span class=&quot;nt&quot;&gt;-new&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-newkey&lt;/span&gt; rsa: 2048 &lt;span class=&quot;nt&quot;&gt;-nodes&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-keyout&lt;/span&gt; ejemplo.com.key &lt;span class=&quot;nt&quot;&gt;-out&lt;/span&gt; ejemplo.com.csr&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Nota: esta solución aplica para un ambiente escolar ya sea porque tu profesor te pidió un punto de venta y no cuentas con uno de estos lectores, o para hacer pruebas o un ambiente muy pequeño, para el mundo real puede resultar muy incómodo ya que el telefono es algo lento leyendo los códigos.&lt;/p&gt;
+  &lt;p&gt;No olvides remplazar &lt;strong&gt;ejemplo.com&lt;/strong&gt; con el nombre de tu dominio real&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;hola&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Ahora se te pedirá que ingreses los siguientes datos  utilizando solo símbolos alfanuméricos en inglés.
+Para algunos campos habrá un valor predeterminado.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Nombre del país&lt;/strong&gt; (código de dos letras)	El formato de &lt;a href=&quot;https://www.iso.org/obp/ui/&quot;&gt;código de país&lt;/a&gt; de dos letras de la Organización Internacional para la Normalización (ISO)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Nombre del estado o provincia&lt;/strong&gt; (nombre completo)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Nombre de la localidad&lt;/strong&gt; (ciudad) No lo abrevies.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Nombre de la organización&lt;/strong&gt; (se puede usar NA)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Nombre de la unidad organizativa&lt;/strong&gt; (se puede usar NA)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Nombre común&lt;/strong&gt; ( nombre de dominio o subdominio que desea proteger. Es decir, ejemplo.com o *.example.com para SSL Wilcard)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;email&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Una contraseña de comprobación&lt;/strong&gt; Esto se debe dejar en blanco (solo toca intro).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Un nombre de compañía opcional&lt;/strong&gt; Esto se debe dejar en blanco (solo toca intro).&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hola&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hola&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mundo&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;hola&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;Una vez que se proporciona toda la información solicitada, tendrás dos archivos generados en el directorio actual: * .csr y * .key.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;El código de clave privada es esencial para la instalación del certificado, que se realizará “después” de que el certificado se active y se emita. Asegúrate de guardar el archivo de clave privada o moverlo al directorio donde puede ubicarse más fácilmente. El contenido del archivo es un bloque de código que comienza con “—– BEGIN PRIVATE KEY —–” y termina con “—– END PRIVATE KEY —–”.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;siguiente-paso&quot;&gt;Siguiente paso&lt;/h3&gt;
+&lt;p&gt;Tu CSR ha sido creado. Abre &lt;strong&gt;ejemplo.com.csr&lt;/strong&gt; en un editor de texto, copia y pega el contenido en el formulario de inscripción en línea cuando se te solicite.&lt;/p&gt;
+
 </description>
-        <pubDate>Wed, 18 Sep 2019 00:00:00 -0500</pubDate>
-        <link>http://localhost:4000/python/android/2019/09/18/leer-codigo-barra-android-python.html</link>
-        <guid isPermaLink="true">http://localhost:4000/python/android/2019/09/18/leer-codigo-barra-android-python.html</guid>
+        <pubDate>Sat, 28 Dec 2019 00:00:00 -0600</pubDate>
+        <link>http://localhost:4000/google%20cloud/2019/12/28/generar-csr-usando-openssl.html</link>
+        <guid isPermaLink="true">http://localhost:4000/google%20cloud/2019/12/28/generar-csr-usando-openssl.html</guid>
         
         
-        <category>python</category>
-        
-        <category>android</category>
+        <category>google cloud</category>
         
       </item>
     

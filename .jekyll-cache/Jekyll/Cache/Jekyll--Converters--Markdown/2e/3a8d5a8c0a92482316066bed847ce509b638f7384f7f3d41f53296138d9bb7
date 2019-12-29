@@ -1,0 +1,52 @@
+I"'<p>Generación de una solicitud de firma de certificado (CSR) en los servicios de Google Cloud</p>
+
+<p><strong>Antes de solicitar un certificado SSL</strong>, es necesario generar una Solicitud de firma de certificado (CSR).</p>
+
+<p>Google Cloud Platform le permite generar una CSR (Certificate Signing Request, Solicitud de Firma de Certificado) utilizando <strong>Google Cloud Shell</strong> , la consola de línea de comandos integrada que proporciona acceso a los recursos de la nube directamente desde un navegador.</p>
+
+<p>Se requiere tener un proyecto creado previamente para acceder a Cloud Shell. Puede ser creado desde el <strong>IAM y administración</strong> de área <a href="https://console.cloud.google.com/project?_ga=1.216733855.869957752.1479794157">aquí</a> . Una vez que se crea el proyecto, Google Cloud Shell está disponible para usted.</p>
+
+<p>Google Cloud Shell se puede activar usando el botón <strong>Activar Google Cloud Shell</strong> en la parte superior de la ventana:
+<img src="/assets/images/gcloud.png" alt="walking" /></p>
+
+<p>Se abrirá una nueva sesión de Cloud Shell en la parte inferior de la ventana. De forma predeterminada, se ubicará en el directorio de inicio del usuario /home/user:</p>
+
+<p>Google Cloud Shell admite el kit de herramientas <strong>OpenSSL</strong> que se puede usar para la generación de CSR.</p>
+
+<p>Los pasos para generar una CSR en Cloud Shell son :</p>
+
+<ul>
+  <li>Ejecuta el siguiente comando para crear la solicitud de Clave Privada y Solicitud de Firma de Certificado ( server.key y server.csr ).</li>
+  <li>Para evitar más confusión, recomendamos reemplazar “ejemplo.com” en ejemplo.com.key y ejemplo.com.csr con el nombre de dominio real para el que se emitirá el certificado.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">openssl req <span class="nt">-new</span> <span class="nt">-newkey</span> rsa: 2048 <span class="nt">-nodes</span> <span class="nt">-keyout</span> ejemplo.com.key <span class="nt">-out</span> ejemplo.com.csr</code></pre></figure>
+
+<blockquote>
+  <p>No olvides remplazar <strong>ejemplo.com</strong> con el nombre de tu dominio real</p>
+</blockquote>
+
+<p>Ahora se te pedirá que ingreses los siguientes datos  utilizando solo símbolos alfanuméricos en inglés.
+Para algunos campos habrá un valor predeterminado.</p>
+<ul>
+  <li><strong>Nombre del país</strong> (código de dos letras)	El formato de <a href="https://www.iso.org/obp/ui/">código de país</a> de dos letras de la Organización Internacional para la Normalización (ISO)</li>
+  <li><strong>Nombre del estado o provincia</strong> (nombre completo)</li>
+  <li><strong>Nombre de la localidad</strong> (ciudad) No lo abrevies.</li>
+  <li><strong>Nombre de la organización</strong> (se puede usar NA)</li>
+  <li><strong>Nombre de la unidad organizativa</strong> (se puede usar NA)</li>
+  <li><strong>Nombre común</strong> ( nombre de dominio o subdominio que desea proteger. Es decir, ejemplo.com o *.example.com para SSL Wilcard)</li>
+  <li><strong>email</strong></li>
+  <li><strong>Una contraseña de comprobación</strong> Esto se debe dejar en blanco (solo toca intro).</li>
+  <li><strong>Un nombre de compañía opcional</strong> Esto se debe dejar en blanco (solo toca intro).</li>
+</ul>
+
+<p>Una vez que se proporciona toda la información solicitada, tendrás dos archivos generados en el directorio actual: * .csr y * .key.</p>
+
+<blockquote>
+  <p>El código de clave privada es esencial para la instalación del certificado, que se realizará “después” de que el certificado se active y se emita. Asegúrate de guardar el archivo de clave privada o moverlo al directorio donde puede ubicarse más fácilmente. El contenido del archivo es un bloque de código que comienza con “—– BEGIN PRIVATE KEY —–” y termina con “—– END PRIVATE KEY —–”.</p>
+</blockquote>
+
+<h3 id="siguiente-paso">Siguiente paso</h3>
+<p>Tu CSR ha sido creado. Abre <strong>ejemplo.com.csr</strong> en un editor de texto, copia y pega el contenido en el formulario de inscripción en línea cuando se te solicite.</p>
+
+:ET
