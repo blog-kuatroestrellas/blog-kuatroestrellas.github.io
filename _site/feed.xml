@@ -5,9 +5,221 @@
     <description>Informatica Electronica Arduino Python</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 29 Dec 2019 00:34:30 -0600</pubDate>
-    <lastBuildDate>Sun, 29 Dec 2019 00:34:30 -0600</lastBuildDate>
+    <pubDate>Sun, 01 Mar 2020 23:32:27 -0600</pubDate>
+    <lastBuildDate>Sun, 01 Mar 2020 23:32:27 -0600</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Controlar Arduino desde Cortana</title>
+        <description>&lt;h2 id=&quot;hola-cortana-prende-la-luz&quot;&gt;HOLA CORTANA prende la luz&lt;/h2&gt;
+
+&lt;p&gt;Hola makers, en esta ocasión les traigo un tutorial para controlar lo que tu Arduino pueda controlar mediante comandos de voz con la asistente virtual &lt;strong&gt;Cortana&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Cuando se me ocurrió hacer esto mi idea era usar el SDK de Cortana para crear una skill, luego correr un servidor local en node.js que esté escuchando las peticiones y se encargue de enviarlo al arduino, mediante johny-five o algo parecido, pero me encontre con &lt;strong&gt;Blynk&lt;/strong&gt; y &lt;strong&gt;IFTTT&lt;/strong&gt;, y si ya esta inventada la rueda pues hay que usarla.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ifttt.com/&quot;&gt;IFTTT&lt;/a&gt; es la onda cuando se trata de automatizar acciones y tareas en Internet, es un servicio que nos facilita la vida por ejemplo poder subir a Twitter la misma foto que subiste a Facebook, y entre los servicios que integra está el del Asistente de Google y Cortana.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blynk.io/&quot;&gt;Blynk&lt;/a&gt; es una plataforma que permite controlar tu placa Arduino, Rapsberry Pi, ESP8266, NodeMCU, etc desde cualquier parte del mundo mediante una app disponible para Android y iOS, te da la posibilidad de crear una interfaz gráfica de arrastrar y soltar.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;En este proyecto usé un Arduino UNO y el puerto Serie porque soy un estudiante pobre y no tengo para una Rapsberry Pi o un NodeMCU, pero te recomiendo que si tienes una placa NodeMCU/ESP8266 la uses ya que es mucho más cómodo y fácil de usar y no dependerás de tener encendida tu PC todo el tiempo. tan pronto tenga una de esas placas hago un nuevo tutorial.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Ingredientes:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Arduino UNO &lt;icon class=&quot;fa fa-buy&quot;&gt;&lt;/icon&gt;&lt;a href=&quot;https://s.click.aliexpress.com/e/_dSAL5cl&quot; target=&quot;_parent&quot;&gt;Comprar en Aliexpress&lt;icon class=&quot;fa fa-shopping-cart&quot;&gt;&lt;/icon&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;LED o relevador&lt;/li&gt;
+  &lt;li&gt;Un celular &lt;a href=&quot;https://itunes.apple.com/us/app/blynk-iot-for-arduino-esp32/id808760481?mt=8&quot;&gt;iOS&lt;/a&gt; o &lt;a href=&quot;https://play.google.com/store/apps/details?id=cc.blynk&amp;amp;hl=en_US&quot;&gt;Android&lt;/a&gt; con &lt;a href=&quot;https://blynk.io/&quot;&gt;Blynk&lt;/a&gt; Instalado&lt;/li&gt;
+  &lt;li&gt;PC con Windows&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ifttt.com/&quot;&gt;IFTTT&lt;/a&gt; instalado en tu teléfono, también puedes usar la versión web.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;empezando-con-blynk&quot;&gt;EMPEZANDO CON BLYNK&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Abrimos la app y le damos en Nuevo Proyecto:
+&lt;img src=&quot;https://i.imgur.com/Ft2KRAs.png&quot; alt=&quot;post 1&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Le ponemos cualquier nombre al proyecto, Seleccionamos &lt;strong&gt;Arduino UNO&lt;/strong&gt;, Conexión &lt;strong&gt;USB&lt;/strong&gt;, &lt;strong&gt;CREAR&lt;/strong&gt;:
+&lt;img src=&quot;https://i.imgur.com/QMZbWJv.png&quot; alt=&quot;post 2&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Una vez creado blynk nos genera un token y lo envía por email, esta sera nuestra “llave” para poder conectar el arduino a blynk&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ahora nos muestra un lienzo, tocamos cualquier parte de la pantalla y nos saldrá un menú, selecionamos &lt;strong&gt;Button&lt;/strong&gt;:
+&lt;img src=&quot;https://i.imgur.com/6iJoJwh.png&quot; alt=&quot;post 3&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Lo arrastramos a la posición que queramos y le damos click, en OUTPUT Seleccionamos digital(En mi caso usare el pin 8 de arduino así que selecciono D8), cambiar PUSH por SWITCH y listo.
+&lt;img src=&quot;https://i.imgur.com/QBwNhLT.png&quot; alt=&quot;post 4&quot; /&gt;
+&lt;!--&lt;img src=&quot;https://i.imgur.com/QBwNhLT.png&quot; width=&quot;65%&quot; heigth=&quot;65%&quot;&gt;--&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;configurando-el-arduino&quot;&gt;Configurando el Arduino&lt;/h2&gt;
+
+&lt;p&gt;Lo primero que necesitaremos será instalar la libreria para que Blynk funcione en Arduino, para esto vamos a Herramientas &lt;strong&gt;&amp;gt;&lt;/strong&gt; Administrado de Bibliotecas, Escribir &lt;strong&gt;blink&lt;/strong&gt; en el buscador y asegurarnos de elegir la última versión
+&lt;img src=&quot;https://i.imgur.com/vgSDQtj.png&quot; alt=&quot;arduino 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ahora cargamos el siguiente sketch, solo copia y pega lo siguiente, ustedes son expertos haciendo eso, solo coloca tu token que te genero la app Blynk en uno de los pasos anteriores.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#define BLYNK_PRINT SwSerial
+&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;SoftwareSerial.h&amp;gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SoftwareSerial&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SwSerial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// RX, TX&lt;/span&gt;
+    
+&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;BlynkSimpleStream.h&amp;gt;
+&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;xxx_TuTokenBlynk_xxx&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//Cambiar por tu token&lt;/span&gt;
+
+
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;SwSerial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9600&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9600&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Blynk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Blynk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;El circuito es simplemente conectar un LED o relevador al pin 8 y listo.&lt;/p&gt;
+
+&lt;p&gt;Ahora debemos buscar la carpeta donde estan almacenadas las librerias de arduino, buscar Blynk/scripts, luego abrir esa ruta en CMD, así:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd PATH_ARDUINO_LIBRARIES/Blynk/scripts
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;en mi caso es:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd C:\Users\Arturo\Documents\Arduino\libraries\Blynk\scripts
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Ahora debemos detectar en que puerto serie esta conectado nuestro ARDUINO, ahora escribimos en CMD&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;blynk-ser.bat -c COM10
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Sustituye COM10 con tu puerto Serie no seas tan wey.&lt;br /&gt;
+Y listo ya debería estar funcionando
+&lt;img src=&quot;https://i.imgur.com/6vMGeH1.jpg&quot; alt=&quot;cmd&quot; /&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;El paso anterior se habría evitado con una conexión wifi, por ejemplo usando una Rapsberry Pi o un nodeMCU, es solo para activar la conexion a internet al puerto serie en el cual está conectado el arduino.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;ahora-ve-a-blynk-en-tu-telefono-y-dale-play&quot;&gt;Ahora ve a blynk en tu telefono y dale PLAY&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/xi4DcRq.png&quot; alt=&quot;app blynk&quot; /&gt;
+Si hiciste todo bien hasta ahora
+en estos momentos deberías poder encender y apagar el LED.
+&lt;img src=&quot;https://i.imgur.com/7NtJuql.jpg&quot; alt=&quot;arduino&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;
+&lt;a href=&quot;https://s.click.aliexpress.com/e/_dV13flB?bz=725*90&quot; target=&quot;_parent&quot;&gt;&lt;img width=&quot;725&quot; height=&quot;90&quot; src=&quot;//ae01.alicdn.com/kf/He7c2914340344500beb9908b8e408559a.png&quot; /&gt;&lt;/a&gt;
+&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;felicidades-hemos-hecho-la-parte-más-díficil-de-este-tutorial-ahora-lo-que-viene-es-de-lo-más-sencillo&quot;&gt;FELICIDADES hemos hecho la parte más díficil de este tutorial ahora lo que viene es de lo más sencillo&lt;/h2&gt;
+
+&lt;p&gt;Ahora nos dirigimos a la app de &lt;a href=&quot;https://ifttt.com/&quot;&gt;IFTTT&lt;/a&gt; y presionamos &lt;strong&gt;GET MORE&lt;/strong&gt;
+&lt;img src=&quot;https://i.imgur.com/41hYqzv.png&quot; alt=&quot;ifttt&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Presiona símbolo &lt;strong&gt;+&lt;/strong&gt;
+&lt;img src=&quot;https://i.imgur.com/m92BLe2.png&quot; alt=&quot;applet&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Sellecciona &lt;strong&gt;This&lt;/strong&gt;
+&lt;img src=&quot;https://i.imgur.com/TxP1ets.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Busca y Selecciona a Cortana
+&lt;img src=&quot;https://i.imgur.com/tzEFqtz.png&quot; alt=&quot;cortana&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ahora crearemos un disparador, lo único que necesitamos es detectar una palabra clave en este caso, &lt;strong&gt;“enciende la luz”&lt;/strong&gt;, así que selecciona &lt;strong&gt;Say a specific phrase&lt;/strong&gt; 
+&lt;img src=&quot;https://i.imgur.com/3DJbFlf.png&quot; alt=&quot;phrase&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ahora rellenamos los campos con lo siguiente, esto es a como tu lo prefieras, puedes ecoger cualquier otra frase&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Whar do you want to say?&lt;/strong&gt; : enciende la luz&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;What’s another way to say it?&lt;/strong&gt; : prende el foco&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;What do you want Cortanato say in response?&lt;/strong&gt; : Entendido, como tu ordenes amo y señor doctor profesor Patricio&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/RGkIooH.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ahora click en &lt;strong&gt;That&lt;/strong&gt;
+&lt;img src=&quot;https://i.imgur.com/ze8s8QW.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Busca y selecciona &lt;strong&gt;webhooks&lt;/strong&gt;
+&lt;img src=&quot;https://i.imgur.com/jgjrDaH.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Make a web request
+&lt;img src=&quot;https://i.imgur.com/SwYTsr3.png&quot; alt=&quot;&quot; /&gt;
+&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;
+Antes del siguiente paso vamos a nuestro cmd y escribimos lo siguiente para averiguar la dirección IP de los servidores de blynk en tu país, solo escribe:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ping cloud.blynk.cc 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;y copia la IP que te salga para el próximo paso, en mi país es 45.55.96.146
+&lt;br /&gt;&lt;br /&gt;
+Ahora rellenamos con los siguientes datos&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;URL&lt;/strong&gt; : http://IP_BLYNK_PAIS/TU_BLYNK_TOKEN/update/D8, ejemplo: http://45.55.96.146/eGNyA0Rf7Qn92CENyKolr24c_J2UEvXt/update/D8&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;METHOD&lt;/strong&gt; : PUT&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Content type&lt;/strong&gt; : aplicattion/json&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Body&lt;/strong&gt; : [“1”]&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/dw2EToa.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Confirmamos y damos Finish&lt;/p&gt;
+
+&lt;h2 id=&quot;ahora-haremos-los-mismos-pasos-pero-para-apagar-el-foco&quot;&gt;Ahora haremos los mismos pasos pero para apagar el foco&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;creamos un nuevo applet&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;+&lt;/strong&gt; this&lt;/li&gt;
+  &lt;li&gt;seleccionar cortana
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Whar do you want to say?&lt;/strong&gt; : apaga la luz la luz&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;What’s another way to say it?&lt;/strong&gt; : apaga el foco&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;What do you want Cortanato say in response?&lt;/strong&gt; : Entendido, como tu ordenes amo y señor doctor profesor Patricio&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;+&lt;/strong&gt; that&lt;/li&gt;
+  &lt;li&gt;seleccionar webhooks, todo es igual al primer ejemplo solo se cambia el &lt;strong&gt;1&lt;/strong&gt; por es &lt;strong&gt;0&lt;/strong&gt; en body
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;URL&lt;/strong&gt; : http://IP_BLYNK_PAIS/TU_BLYNK_TOKEN/update/D8, ejemplo: http://45.55.96.146/eGNyA0Rf7Qn92CENyKolr24c_J2UEvXt/update/D8&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;METHOD&lt;/strong&gt; : PUT&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Content type&lt;/strong&gt; : aplicattion/json&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Body&lt;/strong&gt; : [“0”]&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Finish y listo
+Si hicieron todo correctamente simplemente diganle a cortana que Encienda la Luz&lt;br /&gt;
+Aqui les dejo un demo ya funcionando&lt;/p&gt;
+&lt;p&gt;&lt;iframe style=&quot;width:100%;&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/aeIdE9sBKDo?rel=0&amp;amp;showinfo=0&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/p&gt;
+
+&lt;p&gt;Si tienes alguna duda hazmelo saber&lt;/p&gt;
+
+&lt;h2 id=&quot;en-nuestro-próximo-post-haremos-lo-mismo-pero-desde-el-asistente-de-google-ok-google-enciende-la-luz&quot;&gt;En nuestro próximo post haremos lo mismo pero desde el asistente de Google: OK Google enciende la luz&lt;/h2&gt;
+</description>
+        <pubDate>Sat, 29 Feb 2020 00:00:00 -0600</pubDate>
+        <link>http://localhost:4000/iot/arduino/blynk/cortana/ifttt/2020/02/29/controlando-arduino-desde-cortana.html</link>
+        <guid isPermaLink="true">http://localhost:4000/iot/arduino/blynk/cortana/ifttt/2020/02/29/controlando-arduino-desde-cortana.html</guid>
+        
+        
+        <category>IoT</category>
+        
+        <category>arduino</category>
+        
+        <category>blynk</category>
+        
+        <category>Cortana</category>
+        
+        <category>IFTTT</category>
+        
+      </item>
     
       <item>
         <title>Generar un CSR en Google Cloud</title>
@@ -69,6 +281,184 @@ Para algunos campos habrá un valor predeterminado.&lt;/p&gt;
         
         
         <category>google cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>We all wait for summer</title>
+        <description>&lt;p&gt;This is changed. As I engage in the so-called “bull sessions” around and about the school, I too often find that most college men have a misconception of the purpose of education. Most of the “brethren” think that &lt;a href=&quot;#&quot;&gt;education should equip&lt;/a&gt; them with the proper instruments of exploitation so that they can forever trample over the masses. Still others think that education should furnish them with noble ends rather than means to an end.&lt;/p&gt;
+
+&lt;p&gt;It seems to me that education has a two-fold function to perform in the life of man and in society: the one is utility and the other is culture. Education must enable a man to become more efficient, to achieve with increasing facility the ligitimate goals of his life.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 12 Jan 2018 00:00:00 -0600</pubDate>
+        <link>http://localhost:4000/jekyll/tutorial/2018/01/12/we-all-wait-for-summer.html</link>
+        <guid isPermaLink="true">http://localhost:4000/jekyll/tutorial/2018/01/12/we-all-wait-for-summer.html</guid>
+        
+        
+        <category>Jekyll</category>
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Tree of Codes</title>
+        <description>&lt;p&gt;The first mass-produced book to deviate from a rectilinear format, at least in the United States, is thought to be this 1863 edition of Red Riding Hood, cut into the shape of the protagonist herself with the troublesome wolf curled at her feet. Produced by the Boston-based publisher Louis Prang, this is the first in their “Doll Series”, a set of five “die-cut” books, known also as shape books — the other titles being Robinson Crusoe, Goody Two-Shoes (also written by Red Riding Hood author Lydia Very), Cinderella, and King Winter.&lt;/p&gt;
+
+&lt;p&gt;As for this particular rendition of Charles Perrault’s classic tale, the text and design is by Lydia Very (1823-1901), sister of Transcendentalist poet Jones Very. The gruesome ending of the original — which sees Little Red Riding Hood being gobbled up as well as her grandmother — is avoided here, the gore giving way to the less bloody aims of the morality tale, and the lesson that one should not disobey one’s mother.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;It would seem the claim could also extend to die cut books in general, as we can’t find anything sooner, but do let us know in the comments if you have further light to shed on this! Such books are, of course, still popular in children’s publishing today, though the die cutting is not now limited to mere outlines, as evidenced in a beautiful 2014 version of the same Little Red Riding Hood story.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;An 1868 Prang catalogue would later claim that such “books in the shape of a regular paper Doll… originated with us”.&lt;/p&gt;
+
+&lt;p&gt;The die cut has also been employed in the non-juvenile sphere as well, a recent example being Jonathan Safran Foer’s ambitious Tree of Codes.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 12 Jan 2018 00:00:00 -0600</pubDate>
+        <link>http://localhost:4000/jekyll/tutorial/2018/01/12/tree-of-codes.html</link>
+        <guid isPermaLink="true">http://localhost:4000/jekyll/tutorial/2018/01/12/tree-of-codes.html</guid>
+        
+        
+        <category>Jekyll</category>
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Red Riding Hood</title>
+        <description>&lt;p&gt;The first mass-produced book to deviate from a rectilinear format, at least in the United States, is thought to be this 1863 edition of Red Riding Hood, cut into the shape of the protagonist herself with the troublesome wolf curled at her feet. Produced by the Boston-based publisher Louis Prang, this is the first in their “Doll Series”, a set of five “die-cut” books, known also as shape books — the other titles being Robinson Crusoe, Goody Two-Shoes (also written by Red Riding Hood author Lydia Very), Cinderella, and King Winter.&lt;/p&gt;
+
+&lt;p&gt;An 1868 Prang catalogue would later claim that such “books in the shape of a regular paper Doll… originated with us”.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;It would seem the claim could also extend to die cut books in general, as we can’t find anything sooner, but do let us know in the comments if you have further light to shed on this! Such books are, of course, still popular in children’s publishing today, though the die cutting is not now limited to mere outlines, as evidenced in a beautiful 2014 version of the same Little Red Riding Hood story.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The die cut has also been employed in the non-juvenile sphere as well, a recent example being Jonathan Safran Foer’s ambitious Tree of Codes.&lt;/p&gt;
+
+&lt;p&gt;As for this particular rendition of Charles Perrault’s classic tale, the text and design is by Lydia Very (1823-1901), sister of Transcendentalist poet Jones Very. The gruesome ending of the original — which sees Little Red Riding Hood being gobbled up as well as her grandmother — is avoided here, the gore giving way to the less bloody aims of the morality tale, and the lesson that one should not disobey one’s mother.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 12 Jan 2018 00:00:00 -0600</pubDate>
+        <link>http://localhost:4000/jekyll/tutorial/2018/01/12/red-riding.html</link>
+        <guid isPermaLink="true">http://localhost:4000/jekyll/tutorial/2018/01/12/red-riding.html</guid>
+        
+        
+        <category>Jekyll</category>
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Powerful things you can do with the Markdown editor</title>
+        <description>&lt;p&gt;There are lots of powerful things you can do with the Markdown editor&lt;/p&gt;
+
+&lt;p&gt;If you’ve gotten pretty comfortable with writing in Markdown, then you may enjoy some more advanced tips about the types of things you can do with Markdown!&lt;/p&gt;
+
+&lt;p&gt;As with the last post about the editor, you’ll want to be actually editing this post as you read it so that you can see all the Markdown code we’re using.&lt;/p&gt;
+
+&lt;h2 id=&quot;special-formatting&quot;&gt;Special formatting&lt;/h2&gt;
+
+&lt;p&gt;As well as bold and italics, you can also use some other special formatting in Markdown when the need arises, for example:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;del&gt;strike through&lt;/del&gt;&lt;/li&gt;
+  &lt;li&gt;==highlight==&lt;/li&gt;
+  &lt;li&gt;*escaped characters*&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;writing-code-blocks&quot;&gt;Writing code blocks&lt;/h2&gt;
+
+&lt;p&gt;There are two types of code elements which can be inserted in Markdown, the first is inline, and the other is block. Inline code is formatted by wrapping any word or words in back-ticks, &lt;code class=&quot;highlighter-rouge&quot;&gt;like this&lt;/code&gt;. Larger snippets of code can be displayed across multiple lines using triple back ticks:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.my-link {
+    text-decoration: underline;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you want to get really fancy, you can even add syntax highlighting using Rouge.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/3.jpg&quot; alt=&quot;walking&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;reference-lists&quot;&gt;Reference lists&lt;/h2&gt;
+
+&lt;p&gt;The quick brown jumped over the lazy.&lt;/p&gt;
+
+&lt;p&gt;Another way to insert links in markdown is using reference lists. You might want to use this style of linking to cite reference material in a Wikipedia-style. All of the links are listed at the end of the document, so you can maintain full separation between content and its source or reference.&lt;/p&gt;
+
+&lt;h2 id=&quot;full-html&quot;&gt;Full HTML&lt;/h2&gt;
+
+&lt;p&gt;Perhaps the best part of Markdown is that you’re never limited to just Markdown. You can write HTML directly in the Markdown editor and it will just work as HTML usually does. No limits! Here’s a standard YouTube embed code as an example:&lt;/p&gt;
+
+&lt;p&gt;&lt;iframe style=&quot;width:100%;&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/Cniqsc9QfDo?rel=0&amp;amp;showinfo=0&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 12 Jan 2018 00:00:00 -0600</pubDate>
+        <link>http://localhost:4000/jekyll/tutorial/2018/01/12/powerful-things-markdown-editor.html</link>
+        <guid isPermaLink="true">http://localhost:4000/jekyll/tutorial/2018/01/12/powerful-things-markdown-editor.html</guid>
+        
+        
+        <category>Jekyll</category>
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Is Intelligence Enough</title>
+        <description>&lt;p&gt;Education must also train one for quick, resolute and effective thinking. To think incisively and to think for one’s self is very difficult.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;We are prone to let our mental life become invaded by legions of half truths, prejudices, and propaganda. At this point, I often wonder whether or not education is fulfilling its purpose. A great majority of the so-called educated people do not think logically and scientifically.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Even the press, the classroom, the platform, and the pulpit in many instances do not give us objective and unbiased truths. To save man from the morass of propaganda, in my opinion, is one of the chief aims of education. Education must enable one to sift and weigh evidence, to discern the true from the false, the real from the unreal, and the facts from the fiction.&lt;/p&gt;
+
+&lt;p&gt;The function of education, therefore, is to teach one to think intensively and to think critically. But education which stops with efficiency may prove the greatest menace to society. The most dangerous criminal may be the man gifted with reason, but with no morals.&lt;/p&gt;
+
+&lt;p&gt;The late Eugene Talmadge, in my opinion, possessed one of the better minds of Georgia, or even America. Moreover, he wore the Phi Beta Kappa key. By all measuring rods, Mr. Talmadge could think critically and intensively; yet he contends that I am an inferior being. Are those the types of men we call educated?&lt;/p&gt;
+
+&lt;p&gt;We must remember that intelligence is not enough. Intelligence plus character–that is the goal of true education. The complete education gives one not only power of concentration, but worthy objectives upon which to concentrate. The broad education will, therefore, transmit to one not only the accumulated knowledge of the race but also the accumulated experience of social living.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 12 Jan 2018 00:00:00 -0600</pubDate>
+        <link>http://localhost:4000/jekyll/tutorial/2018/01/12/is-intelligence-enough.html</link>
+        <guid isPermaLink="true">http://localhost:4000/jekyll/tutorial/2018/01/12/is-intelligence-enough.html</guid>
+        
+        
+        <category>Jekyll</category>
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Markdown Example</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated. Something.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 11 Jan 2018 00:00:00 -0600</pubDate>
+        <link>http://localhost:4000/jekyll/tutorial/2018/01/11/markup-example.html</link>
+        <guid isPermaLink="true">http://localhost:4000/jekyll/tutorial/2018/01/11/markup-example.html</guid>
+        
+        
+        <category>Jekyll</category>
+        
+        <category>tutorial</category>
         
       </item>
     

@@ -1,0 +1,111 @@
+I"�<h2 id="hola-cortana-prende-la-luz">HOLA CORTANA prende la luz</h2>
+
+<p>Hola makers, en esta ocasión les traigo un tutorial para controlar lo que tu Arduino pueda controlar mediante comandos de voz con la asistente virtual <strong>Cortana</strong>.</p>
+
+<p>Cuando se me ocurrió hacer esto mi idea era usar el SDK de Cortana para crear una skill, luego correr un servidor local en node.js que esté escuchando las peticiones y se encargue de enviarlo al arduino, mediante johny-five o algo parecido, pero me encontre con <strong>Blynk</strong> y <strong>IFTTT</strong>, y si ya esta inventada la rueda pues hay que usarla.</p>
+
+<ul>
+  <li><a href="https://ifttt.com/">IFTTT</a> es la onda cuando se trata de automatizar acciones y tareas en Internet, es un servicio que nos facilita la vida por ejemplo poder subir a Twitter la misma foto que subiste a Facebook, y entre los servicios que integra está el del Asistente de Google y Cortana.</li>
+  <li><a href="https://blynk.io/">Blynk</a> es una plataforma que permite controlar tu placa Arduino, Rapsberry Pi, ESP8266, NodeMCU, etc desde cualquier parte del mundo mediante una app disponible para Android y iOS, te da la posibilidad de crear una interfaz gráfica de arrastrar y soltar.</li>
+</ul>
+
+<blockquote>
+  <p>En este proyecto usé un Arduino UNO y el puerto Serie porque soy un estudiante pobre y no tengo para una Rapsberry Pi o un NodeMCU, pero te recomiendo que si tienes una placa NodeMCU/ESP8266 la uses ya que es mucho más cómodo y fácil de usar y no dependerás de tener encendida tu PC todo el tiempo. tan pronto tenga una de esas placas hago un nuevo tutorial.</p>
+</blockquote>
+
+<p><strong>Ingredientes:</strong></p>
+<ul>
+  <li>Arduino UNO <icon class="fa fa-buy"></icon><a href="https://s.click.aliexpress.com/e/_dSAL5cl" target="_parent">Comprar en Aliexpress<icon class="fa fa-shopping-cart"></icon></a></li>
+  <li>LED o relevador</li>
+  <li>Un celular <a href="https://itunes.apple.com/us/app/blynk-iot-for-arduino-esp32/id808760481?mt=8">iOS</a> o <a href="https://play.google.com/store/apps/details?id=cc.blynk&amp;hl=en_US">Android</a> con <a href="https://blynk.io/">Blynk</a> Instalado</li>
+  <li>PC con Windows</li>
+  <li><a href="https://ifttt.com/">IFTTT</a> instalado en tu teléfono, también puedes usar la versión web.</li>
+</ul>
+
+<p><br /></p>
+<h2 id="empezando-con-blynk">EMPEZANDO CON BLYNK</h2>
+
+<ul>
+  <li>
+    <p>Abrimos la app y le damos en Nuevo Proyecto:
+<img src="https://i.imgur.com/Ft2KRAs.png" alt="post 1" /></p>
+  </li>
+  <li>
+    <p>Le ponemos cualquier nombre al proyecto, Seleccionamos <strong>Arduino UNO</strong>, Conexión <strong>USB</strong>, <strong>CREAR</strong>:
+<img src="https://i.imgur.com/QMZbWJv.png" alt="post 2" /></p>
+  </li>
+  <li>
+    <p>Una vez creado blynk nos genera un token y lo envía por email, esta sera nuestra “llave” para poder conectar el arduino a blynk</p>
+  </li>
+  <li>
+    <p>Ahora nos muestra un lienzo, tocamos cualquier parte de la pantalla y nos saldrá un menú, selecionamos <strong>Button</strong>:
+<img src="https://i.imgur.com/6iJoJwh.png" alt="post 3" /></p>
+  </li>
+  <li>
+    <p>Lo arrastramos a la posición que queramos y le damos click, en OUTPUT Seleccionamos digital(En mi caso usare el pin 8 de arduino así que selecciono D8), cambiar PUSH por SWITCH y listo.
+<img src="https://i.imgur.com/QBwNhLT.png" alt="post 4" />
+<!--<img src="https://i.imgur.com/QBwNhLT.png" width="65%" heigth="65%">--></p>
+  </li>
+</ul>
+
+<p><br /></p>
+<h2 id="configurando-el-arduino">Configurando el Arduino</h2>
+
+<p>Lo primero que necesitaremos será instalar la libreria para que Blynk funcione en Arduino, para esto vamos a Herramientas <strong>&gt;</strong> Administrado de Bibliotecas, Escribir <strong>blink</strong> en el buscador y asegurarnos de elegir la última versión
+<img src="https://i.imgur.com/vgSDQtj.png" alt="arduino 1" /></p>
+
+<p>Ahora cargamos el siguiente sketch, solo copia y pega lo siguiente, ustedes son expertos haciendo eso, solo coloca tu token que te genero la app Blynk en uno de los pasos anteriores.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#define BLYNK_PRINT SwSerial
+</span>
+<span class="cp">#include &lt;SoftwareSerial.h&gt;
+</span><span class="n">SoftwareSerial</span> <span class="nf">SwSerial</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">);</span> <span class="c1">// RX, TX</span>
+    
+<span class="cp">#include &lt;BlynkSimpleStream.h&gt;
+</span>
+<span class="kt">char</span> <span class="n">auth</span><span class="p">[]</span> <span class="o">=</span> <span class="s">"xxx_TuTokenBlynk_xxx"</span><span class="p">;</span> <span class="c1">//Cambiar por tu token</span>
+
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span>
+<span class="p">{</span>
+
+  <span class="n">SwSerial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+  <span class="n">Blynk</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">Serial</span><span class="p">,</span> <span class="n">auth</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">Blynk</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>El circuito es simplemente conectar un LED o relevador al pin 8 y listo.</p>
+
+<p>Ahora debemos buscar la carpeta donde estan almacenadas las librerias de arduino, buscar Blynk/scripts, luego abrir esa ruta en CMD, así:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd PATH_ARDUINO_LIBRARIES/Blynk/scripts
+</code></pre></div></div>
+<p>en mi caso es:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd C:\Users\Arturo\Documents\Arduino\libraries\Blynk\scripts
+</code></pre></div></div>
+<p>Ahora debemos detectar en que puerto serie esta conectado nuestro ARDUINO, ahora escribimos en CMD</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>blynk-ser.bat -c COM10
+</code></pre></div></div>
+<p>Sustituye COM10 con tu puerto Serie no seas tan wey.<br />
+Y listo ya debería estar funcionando
+<img src="https://i.imgur.com/6vMGeH1.jpg" alt="cmd" /></p>
+
+<h2 id="ahora-ve-a-blynk-en-tu-telefono-y-dale-play">Ahora ve a blynk en tu telefono y dale PLAY</h2>
+<p><img src="https://i.imgur.com/xi4DcRq.png" alt="app blynk" />
+Si hiciste todo bien hasta ahora
+en estos momentos deberías poder encender y apagar el LED.
+<img src="https://i.imgur.com/7NtJuql.jpg" alt="arduino" /></p>
+
+<p><br /><br />
+<a href="https://s.click.aliexpress.com/e/_dV13flB?bz=725*90" target="_parent"><img width="725" height="90" src="//ae01.alicdn.com/kf/He7c2914340344500beb9908b8e408559a.png" /></a>
+<br /></p>
+<h2 id="felicidades-hemos-hecho-la-parte-más-díficil-de-este-tutorial-ahora-lo-que-viene-es-de-lo-más-sencillo">FELICIDADES hemos hecho la parte más díficil de este tutorial ahora lo que viene es de lo más sencillo</h2>
+
+<p>Ahora nos dirigimos a la app de <a href="https://ifttt.com/">IFTTT</a> y presionamos <strong>GET MORE</strong>
+<img src="https://i.imgur.com/41hYqzv.png" alt="ifttt" /></p>
+:ET
