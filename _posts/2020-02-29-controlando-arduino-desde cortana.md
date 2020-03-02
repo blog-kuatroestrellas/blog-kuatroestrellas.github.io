@@ -4,7 +4,7 @@ title:  "Controlar Arduino desde Cortana"
 author: kuatroestrellas
 categories: [ IoT, arduino, blynk, Cortana, IFTTT ]
 image: assets/images/2post.jpg
-description: "Controlar luces de arduino remotamente desde Google Assistant, Cortana, Siri y Blynk"
+description: "Controlar luces de arduino remotamente desde Cortana"
 ---
 ## HOLA CORTANA prende la luz  
 
